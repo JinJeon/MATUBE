@@ -114,7 +114,7 @@ export const userPostEdit = async (req, res) => {
     return res.redirect("/user/edit");
   } catch (error) {
     return res.status(400).render("user-edit", {
-      pageTitle: "EDIT YOUR PROFILE!",
+      pageTitle: "EDIT YOUR PROFILE",
       errorMessage: error._message,
     });
   }

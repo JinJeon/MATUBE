@@ -1,0 +1,9 @@
+extends base.pug
+block content
+  h4 EDIT VIDEO
+  form(method="POST")
+    input(name="title",placeholder="Video Title",value=video.title,required,maxlength=80)
+    input(name="description",type="text",placeholder="description",value=video.description,required,minlength=20)
+    input(name="hashtags",type="text",placeholder="hashtags, separated by comma",value=video.hashtags.join(),required)
+    input(value="SAVE",type="submit")
+    a(class="button",href=`/video/${video.id}/delete`) DELETE

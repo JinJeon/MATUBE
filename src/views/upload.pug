@@ -1,0 +1,9 @@
+extends base.pug
+block content 
+  if errorMessage
+    span=errorMessage 
+  form(method="POST")
+    input(type="text",name="title",placeholder="TITLE",required,maxlength=80)
+    input(type="text",name="description",placeholder="description",required,minlength=20)
+    input(type="text",name="hashtags",placeholder="hashtags, separated by comma",required)
+    input(type="submit",value="UPLOAD")

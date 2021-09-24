@@ -1,0 +1,32 @@
+doctype html!
+html(lang="ko")
+  head
+    title #{pageTitle} OF MATUBE
+    link(rel="stylesheet" href="https://unpkg.com/mvp.css")
+  body
+    header
+      h1=pageTitle
+    main 
+      h2
+        nav
+          ul 
+            li 
+              a(href="/") HOME
+            if loggedIn
+              li 
+                a(href="/logout") LOGOUT 
+              li 
+                a(href="/user/edit") EDIT PROFILE
+              li 
+                a(href="/userProfile") #{loggedInUser.name}'S PROFILE
+              li 
+                a(href="/video/upload") UPLOAD
+            else
+              li 
+                a(href="/login") LOGIN
+              li 
+                a(href="/join") JOIN
+            li 
+              a(href="/search") SEARCH
+      block content
+    include partials/footer.pug

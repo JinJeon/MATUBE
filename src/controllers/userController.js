@@ -65,6 +65,7 @@ export const userGetEdit = (req, res) => {
 
 export const userPostEdit = async (req, res) => {
   try {
+    // session, body 값 불러오기
     const {
       session: {
         user: {
@@ -79,6 +80,7 @@ export const userPostEdit = async (req, res) => {
     } = req;
     const exists = await User.findOne({ $or: [{ email }, { username }] });
     if (sessionEmail !== email || sessionUsername !== username) {
+      // email or username 수정 있을 시
       if (exists._id.toString() !== _id) {
         return res.status(400).render("user-edit", {
           pageTitle: "EDIT YOUR PROFILE",
@@ -86,6 +88,7 @@ export const userPostEdit = async (req, res) => {
         });
       }
       const updateUser = await User.findByIdAndUpdate(
+        // 중복이 없을 시 수정
         _id,
         {
           avatarUrl: file ? file.path : avatarUrl,
@@ -100,6 +103,7 @@ export const userPostEdit = async (req, res) => {
       return res.redirect("/user/edit");
     }
     const updateUser = await User.findByIdAndUpdate(
+      // email or username 수정 없을 시
       _id,
       {
         avatarUrl: file ? file.path : avatarUrl,

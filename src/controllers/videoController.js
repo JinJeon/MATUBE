@@ -27,13 +27,14 @@ export const videoGetUpload = (req, res) => {
 };
 export const videoPostUpload = async (req, res) => {
   const { title, description, hashtags } = req.body;
+  const { path: fileUrl } = req.file;
   try {
-    const video = new Video({
+    await Video.create({
+      fileUrl,
       title,
       description,
       hashtags: Video.makeHashtags(hashtags),
     });
-    await video.save();
     return res.redirect("/");
   } catch (error) {
     console.log(error);
@@ -45,8 +46,8 @@ export const videoPostUpload = async (req, res) => {
 };
 export const videoSee = async (req, res) => {
   const { id } = req.params;
-  console.log(req.params);
   const video = await Video.findById(id);
+  console.log(video);
   if (!video) {
     res.render("404", { pageTitle: "VIDEO NOT FOUND" });
   } else {

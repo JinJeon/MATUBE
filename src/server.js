@@ -21,27 +21,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
-    // cookie: {
-    //   maxAge: 2000,
-    // },
   })
 );
 
-// app.use((req, res, next) => {
-//   res.locals.A = "B";
-//   req.sessionStore.all((error, sessions) => {
-//     console.log(sessions);
-//     next();
-//   });
-// });
-
 app.use(localsMiddleware);
-
-// app.get("/tomato", (req, res, next) => {
-//   req.session.tomato += 1;
-//   return res.send(`${req.session.id}`);
-// });
-
+app.use("/uploads", express.static("uploads")); // file uploads link
 app.use("/", rootRouter);
 app.use("/user", userRouter);
 app.use("/video", videoRouter);

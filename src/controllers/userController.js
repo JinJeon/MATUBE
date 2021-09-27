@@ -128,7 +128,14 @@ export const userLogout = (req, res) => {
   req.session.destroy();
   return res.redirect("/");
 };
-export const userSee = (req, res) => res.send("user see");
+export const userSee = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    res.status(404).render("404");
+  }
+  res.render("user/profile", { pageTitle: `${user.name}'S PROFILE`, user });
+};
 export const userGithubLogin = (req, res) => {
   const baseUrl = "https://github.com/login/oauth/authorize";
   const config = {

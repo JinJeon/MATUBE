@@ -23,7 +23,7 @@ userRouter
   .get(userGetEdit)
   .post(uploadAvatar.single("avatar"), userPostEdit);
 userRouter.get("/delete", protectorMiddleware, userDelete);
-userRouter.get("/:id(\\d+)", userSee);
+userRouter.get("/:id([0-9a-f]{24})", userSee);
 userRouter.get("/github/login", publicOnlyMiddleware, userGithubLogin);
 userRouter.get("/github/finish", publicOnlyMiddleware, userGithubFinish);
 userRouter

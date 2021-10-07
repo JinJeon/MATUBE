@@ -9,10 +9,18 @@ const userSchema = new mongoose.Schema({
   password: { type: String },
   location: { type: String },
   socialOnly: { type: Boolean, default: false },
+  video: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Video",
+    },
+  ],
 });
 
 userSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 5);
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 5);
+  }
 });
 
 const userModel = mongoose.model("User", userSchema);

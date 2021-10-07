@@ -1,3 +1,7 @@
 extends ../base.pug
+include ../mixins/video
 block content
-  h1=pageTitle
+  each vid in user.video 
+    +video(vid)
+  else
+    li NOTHING FOUND.

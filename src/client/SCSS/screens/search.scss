@@ -1,0 +1,21 @@
+.search__form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+  input {
+    all: unset;
+    padding: 10px 10px;
+    border-radius: 10px;
+    border: 1px solid ivory;
+    margin-bottom: 10px;
+    background-color: grey;
+    color: ivory;
+    font-size: 15px;
+    text-align: center;
+  }
+  input[type="submit"] {
+    text-align: center;
+    background-color: darkgrey;
+  }
+}

@@ -1,6 +1,7 @@
 import User from "../models/user";
 import bcrypt from "bcrypt";
 import fetch from "node-fetch";
+import Video from "../models/video";
 
 export const userGetJoin = (req, res) =>
   res.render("join", { pageTitle: "JOIN" });
@@ -42,22 +43,21 @@ export const userPostLogin = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username, socialOnly: false });
   if (!user) {
-    res.status(400).render("login", {
+    return res.status(400).render("login", {
       pageTitle: "LOGIN",
       errorMessage: "NONEXISTENT ACCOUNT",
     });
   }
-  req.session.loggedIn = true;
-  req.session.user = user;
-  console.log(password);
   const compare = await bcrypt.compare(password, user.password);
   if (!compare) {
-    res.status(400).render("login", {
+    return res.status(400).render("login", {
       pageTitle: "LOGIN",
       errorMessage: "WRONG PASSWORD",
     });
   }
-  res.redirect("/");
+  req.session.loggedIn = true;
+  req.session.user = user;
+  return res.redirect("/");
 };
 export const userGetEdit = (req, res) => {
   res.render("user-edit", { pageTitle: "EDIT YOUR PROFILE" });
@@ -130,11 +130,15 @@ export const userLogout = (req, res) => {
 };
 export const userSee = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("video");
+  console.log(user);
   if (!user) {
     res.status(404).render("404");
   }
-  res.render("user/profile", { pageTitle: `${user.name}'S PROFILE`, user });
+  res.render("user/profile", {
+    pageTitle: `${user.name}'S PROFILE`,
+    user,
+  });
 };
 export const userGithubLogin = (req, res) => {
   const baseUrl = "https://github.com/login/oauth/authorize";
@@ -174,7 +178,6 @@ export const userGithubFinish = async (req, res) => {
         },
       })
     ).json();
-    console.log(userData);
     const emailData = await (
       await fetch(`${userUrl}/user/emails`, {
         headers: {

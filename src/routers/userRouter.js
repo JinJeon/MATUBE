@@ -22,6 +22,7 @@ userRouter
   .all(protectorMiddleware)
   .get(userGetEdit)
   .post(uploadAvatar.single("avatar"), userPostEdit);
+// single 안에는 name을 입력함
 userRouter.get("/delete", protectorMiddleware, userDelete);
 userRouter.get("/:id([0-9a-f]{24})", userSee);
 userRouter.get("/github/login", publicOnlyMiddleware, userGithubLogin);

@@ -1,10 +1,15 @@
-mixin video(info)
-  div
-    h4
-      a(href=`/video/${info.id}`)=info.title
-    p=info.description
-    small=info.createdAt
-    ul
-      each hashtag in info.hashtags
-        li=hashtag
-    hr
+mixin video(video)
+  a(href=`/video/${video.id}`).video-mixin
+    div.video-mixin__thumb
+    div.video-mixin__data
+      span.video-mixin__title=video.title  
+      div.video-mixin__meta
+        span #{video.meta.views}회 ∙ 
+        span #{video.owner.name}
+      //- h4
+      //- p=video.description
+      //- small=video.createdAt
+      //- ul
+      //-   each hashtag in infvideoo.hashtags
+      //-     li=hashtag
+      //- hr

@@ -7,9 +7,16 @@
 @import "./components/footer.scss";
 @import "./components/video.scss";
 @import "./components/shared.scss";
+@import "./components/forms.scss";
+@import "./components/social-login.scss";
+@import "./components/body.scss";
+@import "./components/label.scss";
 
 //screens
 @import "./screens/search.scss";
+@import "./screens/profile.scss";
+@import "./screens/user-edit.scss";
+@import "./screens/home.scss";
 
 //defaults
 a {

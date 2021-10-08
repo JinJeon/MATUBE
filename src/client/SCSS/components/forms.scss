@@ -1,0 +1,31 @@
+form {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $bg2;
+  border-radius: 10px;
+}
+input:not(input[type="range"]) {
+  all: unset;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid ivory;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-size: 15px;
+  color: ivory;
+  width: 90%;
+  &::placeholder {
+    color: ivory;
+  }
+}
+input[type="submit"],
+.social__btn {
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: ivory;
+  color: $bg;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+}

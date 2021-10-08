@@ -1,8 +1,17 @@
 extends base
 
 block content
-  div 
-    video(src="/"+video.fileUrl, controls)
+  video(src="/"+video.fileUrl, controls)
+  div
+    button#play PLAY 
+    button#mute MUTE 
+    input(type="range", min="0", max="1", step="0.01", value=0.5)#volume
+    div 
+      span#currentTime 00:00
+      span  |   
+      span#totalTime 00:00
+
+//-
   div
     p=video.description
     small=video.createdAt 
@@ -13,3 +22,6 @@ block content
     a(href=`${video.id}/edit`) EDIT &rarr;
     br
     a(href=`${video.id}/delete`) DELETE &rarr;
+
+block scripts
+  script(src="/assets/js/videoPlayer.js")

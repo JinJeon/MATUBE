@@ -130,7 +130,13 @@ export const userLogout = (req, res) => {
 };
 export const userSee = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).populate("video");
+  const user = await User.findById(id).populate({
+    path: "video",
+    populate: {
+      path: "owner",
+      model: "User",
+    },
+  });
   console.log(user);
   if (!user) {
     res.status(404).render("404");

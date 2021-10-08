@@ -1,9 +1,24 @@
 .empty__message {
   margin-bottom: 50px;
-  font-size: 15px;
+  font-size: 25px;
+  text-align: center auto;
+  padding: 10px;
 }
 .video-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 75px;
+  padding: 10px;
+}
+.auth-switch {
+  text-align: center;
+  margin: 10px;
+  a {
+    text-decoration: solid;
+  }
+}
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
 }

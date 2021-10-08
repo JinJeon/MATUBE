@@ -1,0 +1,10 @@
+.social-login {
+  border-top: 2px solid;
+  margin-top: 40px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  .social__btn--github {
+    background-color: $github;
+    color: ivory;
+  }
+}

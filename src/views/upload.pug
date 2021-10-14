@@ -1,11 +1,17 @@
-extends base.pug
+extends base
 block content 
   if errorMessage
-    span=errorMessage 
+    span=errorMessage
+  div 
+    video#preview
+    button#startBtn START RECORD
   form(method="POST", enctype="multipart/form-data")
     label(for="video") VIDEO 
     input(type="file",name="video",id="video",accept="video/*",required)
     input(type="text",name="title",placeholder="TITLE",required,maxlength=80)
-    input(type="text",name="description",placeholder="description",required,minlength=20)
-    input(type="text",name="hashtags",placeholder="hashtags, separated by comma",required)
+    input(type="text",name="description",placeholder="DESCRIPTION",required,minlength=20)
+    input(type="text",name="hashtags",placeholder="HASHTAGS, USE COMMA",required)
     input(type="submit",value="UPLOAD")
+  script(src="/assets/js/main.js")
+  block scripts
+    script(src="/assets/js/recorder.js")

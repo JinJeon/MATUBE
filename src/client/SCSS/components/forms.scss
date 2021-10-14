@@ -4,8 +4,12 @@ form {
   padding: 20px;
   background-color: $bg2;
   border-radius: 10px;
+  input[type="submit"] {
+    color: $bg2;
+    background-color: ivory;
+  }
 }
-input:not(input[type="range"]) {
+input:not(input[type="range"], input[type="submit"]) {
   all: unset;
   padding: 10px 20px;
   border-radius: 10px;
@@ -17,15 +21,19 @@ input:not(input[type="range"]) {
   width: 90%;
   &::placeholder {
     color: ivory;
+    opacity: 50%;
   }
 }
 input[type="submit"],
 .social__btn {
+  all: unset;
   border-radius: 10px;
+  border: none;
   padding: 10px 20px;
-  background-color: ivory;
-  color: $bg;
   text-align: center;
   cursor: pointer;
   display: block;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  width: 90%;
 }

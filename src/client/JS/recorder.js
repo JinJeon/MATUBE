@@ -1,3 +1,5 @@
+import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
+
 const startBtn = document.getElementById("startBtn");
 const preview = document.getElementById("preview");
 
@@ -25,9 +27,11 @@ const startRecord = () => {
   startBtn.innerText = "STOP RECORD";
   startBtn.removeEventListener("click", startRecord);
   startBtn.addEventListener("click", stopRecord);
-  recorder = new MediaRecorder(stream, { MimeType: "video/mp4" });
+  console.log(stream);
+  recorder = new MediaRecorder(stream);
   recorder.ondataavailable = (e) => {
     videoFile = URL.createObjectURL(e.data);
+    console.log(videoFile);
     preview.srcObject = null;
     preview.src = videoFile;
     preview.loop = true;
@@ -36,9 +40,16 @@ const startRecord = () => {
   recorder.start();
 };
 
-const downloadRecord = () => {
+const downloadRecord = async () => {
+  const ffmpeg = createFFmpeg({ log: true });
+  await ffmpeg.load();
+  ffmpeg.FS("writeFile", "recordedFile.webm", await fetchFile(videoFile));
+  await ffmpeg.run("-i", "recordedFile.webm", "-r", "60", "output.mp4");
+  const mp4File = ffmpeg.FS("readFile", "output.mp4");
+  const mp4Blob = new Blob([mp4File.buffer], { type: "video/mp4" });
+  const mp4Url = URL.createObjectURL(mp4Blob);
   const a = document.createElement("a");
-  a.href = videoFile;
+  a.href = mp4Url;
   a.download = "recordedFile.mp4";
   document.body.appendChild(a);
   a.click();

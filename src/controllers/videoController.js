@@ -2,11 +2,6 @@ import { Console } from "console";
 import Video from "../models/video";
 import User from "../models/user";
 
-// export const videoTrend = (req, res) => {
-//   Video.find({},(error, vids) => {
-//     return res.render("home", { pageTitle : "home", vids : [] });
-//   });
-// }
 export const videoTrend = async (req, res) => {
   const vids = await Video.find({})
     .sort({ createdAt: "asc" })

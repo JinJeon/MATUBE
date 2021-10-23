@@ -1,4 +1,5 @@
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
+import regeneratorRuntime from "regenerator-runtime";
 
 const flowBtn = document.getElementById("flowBtn");
 const preview = document.getElementById("preview");

@@ -114,7 +114,7 @@ const handleMousemove = () => {
   movementTimeoutControl = setTimeout(hideController, 3000);
 };
 const handleMouseleave = () => {
-  timeoutControl = setTimeout(hideController, 3000);
+  timeoutControl = setTimeout(hideController, 1000);
 };
 const handleSpaceBar = (event) => {
   if (event.code === "Space") {

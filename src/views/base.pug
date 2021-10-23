@@ -1,4 +1,6 @@
-doctype doctype html
+include mixins/messages
+
+doctype html!
 html(lang="ko")
   head
     meta(charset="UTF-8")
@@ -9,7 +11,14 @@ html(lang="ko")
     link(rel="stylesheet", href="/assets/css/style.css")
   body
     include partials/header
+    
     main
+      if messages.error
+        +messages("error",messages.error)
+      if messages.info
+        +messages("info",messages.info)
+      if messages.success
+        +messages("success", messages.success)
       block content
     include partials/footer
   block scripts

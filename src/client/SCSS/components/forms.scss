@@ -1,5 +1,8 @@
 form {
-  max-width: 450px;
+  label {
+    font-size: 25px;
+  }
+  max-width: 500px;
   margin: 0 auto;
   padding: 20px;
   background-color: $bg2;
@@ -16,7 +19,7 @@ input:not(input[type="range"], input[type="submit"]) {
   border: 2px solid ivory;
   margin-bottom: 5px;
   margin-top: 5px;
-  font-size: 15px;
+  font-size: 20px;
   color: ivory;
   width: 90%;
   &::placeholder {
@@ -36,4 +39,5 @@ input[type="submit"],
   margin-bottom: 5px;
   margin-top: 5px;
   width: 90%;
+  font-size: 20px;
 }

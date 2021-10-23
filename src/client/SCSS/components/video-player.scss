@@ -3,6 +3,7 @@
   position: relative;
   video {
     width: 100%;
+    max-height: 600px;
   }
   .videoControls {
     opacity: 0;
@@ -14,6 +15,7 @@
     border-radius: 10px;
     position: absolute;
     bottom: 10px;
+    max-width: 550px;
     width: 95%;
     left: 0;
     right: 0;

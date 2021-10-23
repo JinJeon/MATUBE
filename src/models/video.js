@@ -1,10 +1,11 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
 // export const makeHashtags = (hashtags) =>
 //   hashtags.split(",").map((word) => (word.startsWith("#")? word : `#${word}`))
 
 const videoSchema = new mongoose.Schema({
   fileUrl: { type: String, required: true },
+  thumbUrl: { type: String, required: true },
   title: { type: String, required: true, trim: true, maxLength: 80 },
   description: { type: String, required: true, trim: true, minLength: 20 },
   createdAt: { type: Date, required: true, default: Date.now },
@@ -18,6 +19,7 @@ const videoSchema = new mongoose.Schema({
     required: true,
     ref: "User",
   },
+  comment: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 // videoSchema.pre('save', async function(){

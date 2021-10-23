@@ -3,10 +3,6 @@ extends base
 block content
   div#videoContainer(data-id=video._id)
     video(src="/"+video.fileUrl)
-    //- div#videoController
-    //-   button#play PLAY 
-    //-   button#mute MUTE 
-    //-   input(type="range", min="0", max="1", step="0.01", value=0.5)#volume
     div#videoController.videoControls
       div.videoControls__play
         span#play.videoControls__playBtn
@@ -23,13 +19,34 @@ block content
       div 
         span#fullScreen
           i.fas.fa-expand
-      //-   span#currentTime 00:00:00
-      //-   span  |   
-      //-   span#totalTime 00:00:00
-      //- div 
-      //-   input(type="range", min="0", step="1", value=0)#timeline
-      //- div
-      //-   button#fullscreen ENTER FULL
+
+  div.video__data
+    p.video__title=video.title
+    small.video__owner UPLOADED BY 
+      a(href=`/user/${video.owner._id}`)=video.owner.name
+    small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+    if String(video.owner._id) === String(loggedInUser._id)
+      a(href=`${video.id}/edit`) EDIT &rarr;
+      //- a(href=`${video.id}/delete`) DELETE &rarr;
+
+  div.video__comment
+    ul 
+      each comment in video.comment.reverse()
+        li.comment__text(data-id=comment._id)
+          i.fas.fa-comment
+          span  #{comment.text}
+          if String(comment.owner._id) === String(loggedInUser._id)
+            span#deleteBtn
+              i.fas.fa-dove
+              //- .delete__btn#deleteBtn  🤫
+
+  if loggedIn
+    div.video__add-comment
+      form.video__comment-form#commentForm
+        textarea(cols="30", rows="10" placeholder="COMMENT WITHIN 20 CHAR")
+        button ADD
 
 block scripts
   script(src="/assets/js/videoPlayer.js")
+  if loggedIn 
+    script(src="/assets/js/commentBox.js")

@@ -126,6 +126,7 @@ export const userPostEdit = async (req, res) => {
 export const userDelete = (req, res) => res.send("User delete");
 export const userLogout = (req, res) => {
   req.session.destroy();
+  // req.flash("info", "BYE!");
   return res.redirect("/");
 };
 export const userSee = async (req, res) => {

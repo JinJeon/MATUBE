@@ -34,7 +34,10 @@ export const userPostJoin = async (req, res) => {
     console.log(error);
     return res
       .status(400)
-      .render("join", { pageTitle: "JOIN FAIL", errorMessage: error._message });
+      .render("join", {
+        pageTitle: "JOIN FAIL!",
+        errorMessage: error._message,
+      });
   }
 };
 export const userGetLogin = (req, res) =>

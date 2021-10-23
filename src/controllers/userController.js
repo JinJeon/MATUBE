@@ -32,12 +32,10 @@ export const userPostJoin = async (req, res) => {
     return res.redirect("/login");
   } catch (error) {
     console.log(error);
-    return res
-      .status(400)
-      .render("join", {
-        pageTitle: "JOIN FAIL!",
-        errorMessage: error._message,
-      });
+    return res.status(400).render("join", {
+      pageTitle: "JOIN FAIL!",
+      errorMessage: error._message,
+    });
   }
 };
 export const userGetLogin = (req, res) =>
@@ -63,7 +61,7 @@ export const userPostLogin = async (req, res) => {
   return res.redirect("/");
 };
 export const userGetEdit = (req, res) => {
-  res.render("user-edit", { pageTitle: "EDIT YOUR PROFILE" });
+  res.render("user-edit", { pageTitle: "EDIT YOUR PROFILE!" });
 };
 
 export const userPostEdit = async (req, res) => {

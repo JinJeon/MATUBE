@@ -10,7 +10,6 @@ module.exports = {
     commentBox: BASE_JS + "commentBox.js",
   },
   mode: "development",
-  watch: true,
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/style.css",

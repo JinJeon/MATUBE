@@ -1,11 +1,11 @@
 .video__data {
   font-size: 15px;
-  text-align: left;
+  text-align: center;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   .video__title {
-    font-size: 30px;
+    font-size: 40px;
     margin-bottom: 5px;
   }
   .video__owner {
@@ -19,27 +19,32 @@
   }
   a {
     margin-bottom: 5px;
+    color: ivory;
   }
 }
-
-.video__comment {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 20px;
-  .comment__text {
-    padding: 10px 10px;
-    background-color: $bg2;
-    color: ivory;
-    margin-bottom: 10px;
-    border-radius: 10000px;
-    span {
-      .fas.fa-dove {
+.comment-area {
+  .video__comment {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    .comment__text {
+      max-width: 500px;
+      padding: 10px 10px;
+      background-color: $bg2;
+      color: ivory;
+      margin-bottom: 10px;
+      border-radius: 100px;
+      button {
         text-align: center;
         cursor: pointer;
         margin-left: auto;
+        background-color: $bg2;
+        border: 0ch;
+        font-size: 20px;
+        color: $yellow2;
       }
     }
   }

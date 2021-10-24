@@ -11,15 +11,13 @@ const addComment = (text, id) => {
   icon1.className = "fas fa-comment";
   const span1 = document.createElement("span");
   span1.innerText = ` ${text}`;
-  const span2 = document.createElement("span");
-  span2.id = "deleteBtn";
-  const icon2 = document.createElement("i");
-  icon2.className = "fas fa-dove";
-  span2.appendChild(icon2);
+  const button1 = document.createElement("button");
+  button1.className = "fas fa-dove";
+  button1.id = "deleteBtn";
 
   newComment.appendChild(icon1);
   newComment.appendChild(span1);
-  newComment.appendChild(span2);
+  newComment.appendChild(button1);
   videoComment.prepend(newComment);
 };
 
@@ -46,17 +44,20 @@ const handleAdd = async (event) => {
 };
 
 const handleDeleteBtn = async (event) => {
-  const { id } = event.target.parentNode.parentNode.dataset;
+  console.log("click");
+  const { id } = event.target.parentNode.dataset;
   const li = document.querySelector(`[data-id="${id}"]`);
   const response = await fetch(`/api/video/${id}/delete`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({ id }),
   });
   if (response.status === 201) {
     li.remove();
   }
+  console.log("done");
 };
 
 if (form) {

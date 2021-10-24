@@ -1,4 +1,9 @@
 form {
+  a {
+    color: $yellow2;
+    font-size: 30px;
+    margin-top: 10px;
+  }
   label {
     font-size: 25px;
   }
@@ -10,6 +15,23 @@ form {
   input[type="submit"] {
     color: $bg2;
     background-color: ivory;
+  }
+  textarea {
+    all: unset;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid ivory;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: ivory;
+    width: 90%;
+    height: 20px;
+  }
+  button {
+    background-color: $bg2;
+    border: 0;
+    font-size: 20px;
+    color: ivory;
   }
 }
 input:not(input[type="range"], input[type="submit"]) {

@@ -10,7 +10,8 @@ const s3 = new aws.S3({
 });
 const multerUploader = multerS3({
   s3: s3,
-  bucket: "jin-MATUBE",
+  bucket: "jin-matube",
+  acl: "public-read",
 });
 
 export const localsMiddleware = (req, res, next) => {

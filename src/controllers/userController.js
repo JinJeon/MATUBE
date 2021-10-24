@@ -79,6 +79,7 @@ export const userPostEdit = async (req, res) => {
       body: { name, email, username, location },
       file,
     } = req;
+    console.log(file);
     const exists = await User.findOne({ $or: [{ email }, { username }] });
     if (sessionEmail !== email || sessionUsername !== username) {
       // email or username 수정 있을 시
@@ -88,11 +89,28 @@ export const userPostEdit = async (req, res) => {
           errorMessage: "This username/email is already taken",
         });
       }
+      // const updatingUser = ()=>{
+      //   const updateUser = await User.findByIdAndUpdate(
+      //     // 중복이 없을 시 수정
+      //     _id,
+      //     {
+      //       avatarUrl: file ? file.path : avatarUrl,
+      //       name,
+      //       email,
+      //       username,
+      //       location,
+      //     },
+      //     { new: true }
+      //   );
+      //   req.session.user = updateUser;
+      //   return res.redirect("/user/edit");
+      // }
+      // updatingUser()
       const updateUser = await User.findByIdAndUpdate(
         // 중복이 없을 시 수정
         _id,
         {
-          avatarUrl: file ? file.path : avatarUrl,
+          avatarUrl: file ? file.location : avatarUrl,
           name,
           email,
           username,
@@ -107,7 +125,7 @@ export const userPostEdit = async (req, res) => {
       // email or username 수정 없을 시
       _id,
       {
-        avatarUrl: file ? file.path : avatarUrl,
+        avatarUrl: file ? file.location : avatarUrl,
         name,
         email,
         username,
@@ -118,6 +136,7 @@ export const userPostEdit = async (req, res) => {
     req.session.user = updateUser;
     return res.redirect("/user/edit");
   } catch (error) {
+    console.log(error);
     return res.status(400).render("user-edit", {
       pageTitle: "EDIT YOUR PROFILE",
       errorMessage: error._message,

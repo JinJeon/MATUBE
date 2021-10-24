@@ -79,7 +79,6 @@ export const userPostEdit = async (req, res) => {
       body: { name, email, username, location },
       file,
     } = req;
-    console.log(file);
     const isHeroku = process.env.NODE_ENV === "production";
     const exists = await User.findOne({ $or: [{ email }, { username }] });
     if (sessionEmail !== email || sessionUsername !== username) {
@@ -137,7 +136,6 @@ export const userPostEdit = async (req, res) => {
     req.session.user = updateUser;
     return res.redirect("/user/edit");
   } catch (error) {
-    console.log(error);
     return res.status(400).render("user-edit", {
       pageTitle: "EDIT YOUR PROFILE",
       errorMessage: error._message,
@@ -147,7 +145,6 @@ export const userPostEdit = async (req, res) => {
 export const userDelete = (req, res) => res.send("User delete");
 export const userLogout = (req, res) => {
   req.session.destroy();
-  // req.flash("info", "BYE!");
   return res.redirect("/");
 };
 export const userSee = async (req, res) => {
@@ -159,7 +156,6 @@ export const userSee = async (req, res) => {
       model: "User",
     },
   });
-  console.log(user);
   if (!user) {
     res.status(404).render("404");
   }
@@ -255,19 +251,20 @@ export const postChangePassword = async (req, res) => {
   const user = await User.findById(_id);
   const compare = await bcrypt.compare(password, user.password);
   if (!compare) {
+    req.flash("error", "PASSWORD INCORRECT");
     return res.status(400).render("change-password", {
       pageTitle: "CHANGE PASSWORD",
-      errorMessage: "Password incorrect",
     });
   }
   if (newpassword !== checkpassword) {
+    req.flash("error", "PASSWORD NOT MATCHED");
     return res.status(400).render("change-password", {
       pageTitle: "CHANGE PASSWORD",
-      errorMessage: "New password is not matched",
     });
   }
-  user.password = password;
+  user.password = newpassword;
   await user.save();
   req.session.user = user;
+  req.flash("success", "EDIT SUCCESS!");
   res.redirect("/logout");
 };

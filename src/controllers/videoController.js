@@ -56,6 +56,7 @@ export const videoSee = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comment");
   if (!video) {
+    req.flash("error", "ERROR!");
     res.render("404", { pageTitle: "VIDEO NOT FOUND" });
   } else {
     res.render("watch", {
@@ -71,9 +72,11 @@ export const videoGetEdit = async (req, res) => {
   } = req.session;
   const video = await Video.findById(id);
   if (!video) {
+    req.flash("error", "ERROR!");
     res.status(404).render("404", { pageTitle: "VIDEO NOT FOUND" });
   }
   if (String(_id) !== String(video.owner)) {
+    req.flash("error", "ERROR!");
     res.status(403).redirect("/");
   } else {
     res.render("edit", { pageTitle: `EDITING : ${video.title}`, video });
@@ -99,6 +102,7 @@ export const videoPostEdit = async (req, res) => {
       description,
       hashtags: Video.makeHashtags(hashtags),
     });
+    req.flash("success", "EDIT SUCCESS!");
     return res.redirect(`/video/${id}`);
   }
 };
@@ -109,13 +113,16 @@ export const videoDelete = async (req, res) => {
   } = req.session;
   const video = await Video.findById(id);
   if (!video) {
+    req.flash("error", "ERROR!");
     res.status(404).render("404", { pageTitle: "VIDEO NOT FOUND" });
   }
   if (String(_id) !== String(video.owner)) {
+    req.flash("error", "NOT AUTHORIZED");
     res.status(403).redirect("/");
   } else {
     await Video.findByIdAndDelete(id);
   }
+  req.flash("info", "VIDEO DELETED");
   return res.redirect("/");
 };
 export const registerViews = async (req, res) => {
@@ -143,6 +150,10 @@ export const createComment = async (req, res) => {
   if (!commentUser) {
     return res.sendStatus(403);
   }
+  if (text.length > 20) {
+    return res.sendStatus(404);
+  }
+  console.log(text);
   const comment = await Comment.create({
     text,
     owner: user._id,

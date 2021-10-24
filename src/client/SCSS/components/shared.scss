@@ -6,9 +6,11 @@
 }
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(auto, 1fr));
   gap: 75px;
   padding: 10px;
+  justify-content: start;
+  position: relative;
 }
 .auth-switch {
   text-align: center;

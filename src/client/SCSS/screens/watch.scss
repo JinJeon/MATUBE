@@ -34,18 +34,21 @@
         margin-bottom: 5px;
         margin-top: 5px;
         color: ivory;
-        width: 80%;
+        width: 90%;
         height: 20px;
+        text-align: center;
       }
       button {
-        vertical-align: super;
-        display: relative;
+        position: absolute;
+        left: 15px;
+        bottom: 15px;
         background-color: $bg2;
-        border: 0;
-        font-size: 40px;
+        border: 0px;
+        font-size: 25px;
         color: ivory;
-        padding-left: 10px;
         cursor: pointer;
+        padding: 2px 2px;
+        font-weight: lighter;
       }
     }
   }
@@ -57,15 +60,16 @@
     margin: 0 auto;
     margin-top: 20px;
     .comment__text {
-      max-width: 500px;
       padding: 10px 10px;
       background-color: $bg2;
       color: ivory;
       margin-bottom: 10px;
       border-radius: 100px;
+      font-size: 16px;
       button {
         text-align: center;
         cursor: pointer;
+        float: right;
         margin-left: auto;
         background-color: $bg2;
         border: 0ch;

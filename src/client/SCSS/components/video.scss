@@ -3,9 +3,16 @@
   padding: 10px;
   .video-mixin__thumb {
     height: 200px;
-    border-radius: 5px;
+    border-radius: 10px;
     width: 200px;
     background-color: ivory;
+    background-position: center;
+    background-size: cover;
+    img {
+      height: 200px;
+      width: 200px;
+      border-radius: 10px;
+    }
   }
   .video-mixin__data {
     padding: 0px 5px;

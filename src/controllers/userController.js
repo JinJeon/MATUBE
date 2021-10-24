@@ -80,6 +80,7 @@ export const userPostEdit = async (req, res) => {
       file,
     } = req;
     console.log(file);
+    const isHeroku = process.env.NODE_ENV === "production";
     const exists = await User.findOne({ $or: [{ email }, { username }] });
     if (sessionEmail !== email || sessionUsername !== username) {
       // email or username 수정 있을 시
@@ -110,7 +111,7 @@ export const userPostEdit = async (req, res) => {
         // 중복이 없을 시 수정
         _id,
         {
-          avatarUrl: file ? file.location : avatarUrl,
+          avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
           name,
           email,
           username,
@@ -125,7 +126,7 @@ export const userPostEdit = async (req, res) => {
       // email or username 수정 없을 시
       _id,
       {
-        avatarUrl: file ? file.location : avatarUrl,
+        avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
         name,
         email,
         username,

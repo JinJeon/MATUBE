@@ -89,9 +89,11 @@ export const videoPostEdit = async (req, res) => {
   if (!video) {
     res.render("404", { pageTitle: "VIDEO NOT FOUND" });
   }
-  if (String(_id) !== String(video.owner)) {
+  const idVideo = await Video.findById(id);
+  if (String(_id) !== String(idVideo.owner)) {
+    console.log(String(_id), String(video.owner));
     req.flash("error", "NOT AUTHORIZED");
-    res.status(403).redirect("/");
+    return res.status(403).redirect("/");
   } else {
     const { title, description, hashtags } = req.body;
     await Video.findByIdAndUpdate(id, {
@@ -99,8 +101,8 @@ export const videoPostEdit = async (req, res) => {
       description,
       hashtags: Video.makeHashtags(hashtags),
     });
+    return res.redirect(`/video/${id}`);
   }
-  return res.redirect(`/video/${id}`);
 };
 export const videoDelete = async (req, res) => {
   const { id } = req.params;

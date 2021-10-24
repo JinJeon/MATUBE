@@ -37,7 +37,7 @@ block content
   div.comment-area
     if loggedIn
       div.video__add-comment
-        form.video__comment-form#commentForm
+        form(method="GET").video__comment-form#commentForm
           textarea(placeholder="COMMENT WITHIN 20 CHAR.")
           button.fas.fa-comments
     div.video__comment

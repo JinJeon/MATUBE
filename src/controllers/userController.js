@@ -44,16 +44,16 @@ export const userPostLogin = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username, socialOnly: false });
   if (!user) {
+    req.flash("error", "NONEXISTENT ACCOUNT");
     return res.status(400).render("login", {
       pageTitle: "LOGIN",
-      errorMessage: "NONEXISTENT ACCOUNT",
     });
   }
   const compare = await bcrypt.compare(password, user.password);
   if (!compare) {
+    req.flash("error", "WRONG PASSWORD");
     return res.status(400).render("login", {
       pageTitle: "LOGIN",
-      errorMessage: "WRONG PASSWORD",
     });
   }
   req.session.loggedIn = true;

@@ -14,6 +14,7 @@ const addComment = (text, id) => {
   const button1 = document.createElement("button");
   button1.className = "fas fa-dove";
   button1.id = "deleteBtn";
+  button1.addEventListener("click", handleDeleteBtn);
 
   newComment.appendChild(icon1);
   newComment.appendChild(span1);
@@ -44,7 +45,7 @@ const handleAdd = async (event) => {
 };
 
 const handleDeleteBtn = async (event) => {
-  console.log("click");
+  console.log("done");
   const { id } = event.target.parentNode.dataset;
   const li = document.querySelector(`[data-id="${id}"]`);
   const response = await fetch(`/api/video/${id}/delete`, {
@@ -57,12 +58,11 @@ const handleDeleteBtn = async (event) => {
   if (response.status === 201) {
     li.remove();
   }
-  console.log("done");
 };
 
 if (form) {
   form.addEventListener("submit", handleAdd);
-  deleteBtn.forEach((deleteBtn) =>
-    deleteBtn.addEventListener("click", handleDeleteBtn)
-  );
 }
+deleteBtn.forEach((deleteBtn) =>
+  deleteBtn.addEventListener("click", handleDeleteBtn)
+);

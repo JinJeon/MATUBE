@@ -22,11 +22,37 @@
     color: ivory;
   }
 }
+
 .comment-area {
+  .video__add-comment {
+    form {
+      textarea {
+        all: unset;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: 2px solid ivory;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        color: ivory;
+        width: 80%;
+        height: 20px;
+      }
+      button {
+        vertical-align: super;
+        display: relative;
+        background-color: $bg2;
+        border: 0;
+        font-size: 40px;
+        color: ivory;
+        padding-left: 10px;
+        cursor: pointer;
+      }
+    }
+  }
   .video__comment {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    max-width: 350px;
     width: 100%;
     margin: 0 auto;
     margin-top: 20px;

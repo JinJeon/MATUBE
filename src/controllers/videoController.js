@@ -55,7 +55,6 @@ export const videoPostUpload = async (req, res) => {
 export const videoSee = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comment");
-  console.log(video);
   if (!video) {
     res.render("404", { pageTitle: "VIDEO NOT FOUND" });
   } else {
@@ -91,7 +90,6 @@ export const videoPostEdit = async (req, res) => {
   }
   const idVideo = await Video.findById(id);
   if (String(_id) !== String(idVideo.owner)) {
-    console.log(String(_id), String(video.owner));
     req.flash("error", "NOT AUTHORIZED");
     return res.status(403).redirect("/");
   } else {
@@ -140,10 +138,10 @@ export const createComment = async (req, res) => {
   const video = await Video.findById(id);
   const commentUser = await User.findById(user._id);
   if (!video) {
-    res.sendStatus(404);
+    return res.sendStatus(404);
   }
   if (!commentUser) {
-    res.sendStatus(403);
+    return res.sendStatus(403);
   }
   const comment = await Comment.create({
     text,
@@ -156,7 +154,6 @@ export const createComment = async (req, res) => {
   commentUser.save();
   return res.status(201).json({ newCommentId: comment._id });
 };
-
 export const deleteComment = async (req, res) => {
   const {
     params: { id },

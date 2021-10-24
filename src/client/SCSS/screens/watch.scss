@@ -60,20 +60,22 @@
     margin: 0 auto;
     margin-top: 20px;
     .comment__text {
+      display: grid;
       padding: 10px 10px;
       background-color: $bg2;
       color: ivory;
       margin-bottom: 10px;
-      border-radius: 100px;
+      border-radius: 15px;
       font-size: 16px;
       button {
         text-align: center;
         cursor: pointer;
         float: right;
         margin-left: auto;
+        border-radius: 1000px;
         background-color: $bg2;
         border: 0ch;
-        font-size: 20px;
+        font-size: 18px;
         color: $yellow2;
       }
     }

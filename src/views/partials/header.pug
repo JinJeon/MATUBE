@@ -15,8 +15,9 @@ header
           a(href="/video/upload") UPLOAD
         li 
           a(href=`/user/${loggedInUser._id}`)
-            if loggedInUser.avatarUrl === ""
-              span ⭐️
+            if loggedInUser.avatarUrl === undefined
+              | MY 
+              i.fas.fa-smile 
             else
               if loggedInUser.avatarUrl
                 if loggedInUser.avatarUrl.includes("github") 

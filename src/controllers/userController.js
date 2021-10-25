@@ -119,6 +119,7 @@ export const userPostEdit = async (req, res) => {
         { new: true }
       );
       req.session.user = updateUser;
+      req.flash("info", "PROFILE UPDATED");
       return res.redirect("/user/edit");
     }
     const updateUser = await User.findByIdAndUpdate(
@@ -134,6 +135,7 @@ export const userPostEdit = async (req, res) => {
       { new: true }
     );
     req.session.user = updateUser;
+    req.flash("info", "PROFILE UPDATED");
     return res.redirect("/user/edit");
   } catch (error) {
     return res.status(400).render("user-edit", {

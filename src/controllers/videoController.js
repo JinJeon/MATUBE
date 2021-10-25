@@ -8,6 +8,7 @@ export const videoTrend = async (req, res) => {
   const vids = await Video.find({})
     .sort({ createdAt: "asc" })
     .populate("owner");
+  console.log(res.locals.loggedInUser.avatarUrl === undefined);
   return res.render("home", { pageTitle: "HOME", vids });
 };
 export const videoSearch = async (req, res) => {
@@ -102,7 +103,7 @@ export const videoPostEdit = async (req, res) => {
       description,
       hashtags: Video.makeHashtags(hashtags),
     });
-    req.flash("success", "EDIT SUCCESS!");
+
     return res.redirect(`/video/${id}`);
   }
 };

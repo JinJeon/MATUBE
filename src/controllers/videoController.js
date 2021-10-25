@@ -103,7 +103,7 @@ export const videoPostEdit = async (req, res) => {
       description,
       hashtags: Video.makeHashtags(hashtags),
     });
-
+    req.flash("info", "VIDEO UPDATED");
     return res.redirect(`/video/${id}`);
   }
 };
